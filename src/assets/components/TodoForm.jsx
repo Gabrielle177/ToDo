@@ -1,11 +1,17 @@
+import React from 'react';
 import { useState } from "react";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function TodoForm ({addTodo}){
     const [value, setValue] = useState("");
     const [category, setCategory] = useState("");
     const [dateStart, setDateStart] = useState("");
     const [dateEnd, setDateEnd] = useState("");
-    
+    const [currentDate, setCurrentDate] = useState(new Date());
+
+//   console.log(currentDate);
+  console.log(dateEnd);
     const handleDateStart = (event) => {
         const newDate = event.target.value;
         setDateStart(newDate);
@@ -14,23 +20,67 @@ function TodoForm ({addTodo}){
     const handleDateEnd = (event) => {
         const newDate = event.target.value
         setDateEnd(newDate);
-    }
+    };
     
     const handleSubmit = (event) => {
         event.preventDefault()
         if(!value || !category){
            return "Prencha os campos"
         }
-        addTodo(value, category, dateStart, dateEnd);
+        addTodo(value, category, dateStart, dateEnd, currentDate);
         setValue("");
         setCategory(""); 
         setDateStart("");
         setDateEnd("");
-
+        setCurrentDate("");
     }
+
+    const notify = () => {
+        if (new Date(dateEnd).getTime() < new Date(currentDate).getTime()){
+            toast.warn('Você possui data(s) expiradas!', {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                });
+    console.log(currentDate);
+    }
+
+        if(dateStart > dateEnd){
+
+        toast.error('Revise a data!', {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            });
+    }
+ 
+
+}
 
     return(
         <>
+        <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        />
          <form className='form-task'
                 onSubmit={handleSubmit} >
 
@@ -71,7 +121,10 @@ function TodoForm ({addTodo}){
                         
                 </div>
 
-                <button className='btn-task' type="submit">Criar tarefa</button>
+                <button className='btn-task' 
+                        type="submit"
+                        onClick={notify}
+                        >Criar tarefa</button>
 
             </form>
         </>

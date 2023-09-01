@@ -1,5 +1,5 @@
 function Todo ({task, removeTask, completeTask}){
-    const msg = "Você possui data(s) vencida(s)";
+     
 return(
     <>
      <div className='todo'>

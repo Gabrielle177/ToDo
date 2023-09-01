@@ -69,6 +69,9 @@ function Home() {
      <main>
         <div className='content'>
             <h1 className='title'>Projetos</h1>
+            <Search 
+            searchTask={searchTask}
+            setSearch={setSearch} />
             
             {tasks.filter((tasks) => tasks.text.toLowerCase().includes(searchTask.toLowerCase()))
             .map((task) => (
@@ -80,11 +83,10 @@ function Home() {
                />
             ))}
             <div>
+                
             <TodoForm addTodo={addTodo} />
             </div>
-            <Search 
-            searchTask={searchTask}
-            setSearch={setSearch} />
+          
            
         </div>
      </main>
