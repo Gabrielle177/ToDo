@@ -3,6 +3,7 @@ import './Home.css';
 import Todo from '../assets/components/Todo';
 import TodoForm from '../assets/components/TodoForm';
 import Search from '../assets/components/Search';
+import checklist from '../assets/checklist.svg';
 
 function Home() {
     const [tasks, setTasks] = useState([
@@ -56,23 +57,24 @@ function Home() {
     return (
         <>
      <header>
-        <div>       
-            <ul>
-                <li>Home</li>
-                <li>Tarefas</li>
-                <li>Projetos</li>
-                <li>Sair</li>
-            </ul>
+        <div className='container-title'>
+            <div className='title'>       
+                <h1>
+                <img src={checklist} alt='icon title'/> To-do
+                <span className='point'>.</span> </h1>
+            </div>
         </div>
-
      </header>
      <main>
         <div className='content'>
-            <h1 className='title'>Projetos</h1>
-            <Search 
-            searchTask={searchTask}
-            setSearch={setSearch} />
-            
+            <div className='box'> 
+                <div className='title'></div>
+            <div className='search'>           
+                <Search 
+                searchTask={searchTask}
+                setSearch={setSearch} />
+            </div>
+            <div className='all-todos'>
             {tasks.filter((tasks) => tasks.text.toLowerCase().includes(searchTask.toLowerCase()))
             .map((task) => (
                <Todo 
@@ -83,8 +85,12 @@ function Home() {
                />
             ))}
             <div>
+            </div>
                 
+            </div>
+            <div className='createTask'>
             <TodoForm addTodo={addTodo} />
+            </div>
             </div>
           
            

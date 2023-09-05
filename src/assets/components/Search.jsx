@@ -1,9 +1,12 @@
+import search from '../search.png';
+import './Search.css';
+
 function Search({searchTask, setSearch}){
     
     return(
         <>
         <div className="search">
-            <h2>Pesquisar</h2>
+            <h2><img src={search} alt='search icon'/></h2>
             <input 
                 name="buscar"
                 placeholder="Pesquisar..."

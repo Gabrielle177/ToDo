@@ -2,6 +2,7 @@ import React from 'react';
 import { useState } from "react";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import './TodoForm.css';
 
 function TodoForm ({addTodo}){
     const [value, setValue] = useState("");
@@ -10,8 +11,6 @@ function TodoForm ({addTodo}){
     const [dateEnd, setDateEnd] = useState("");
     const [currentDate, setCurrentDate] = useState(new Date());
 
-//   console.log(currentDate);
-  console.log(dateEnd);
     const handleDateStart = (event) => {
         const newDate = event.target.value;
         setDateStart(newDate);
@@ -34,7 +33,6 @@ function TodoForm ({addTodo}){
         setDateEnd("");
         setCurrentDate("");
     }
-
     const notify = () => {
         if (new Date(dateEnd).getTime() < new Date(currentDate).getTime()){
             toast.warn('Você possui data(s) expiradas!', {
@@ -49,9 +47,7 @@ function TodoForm ({addTodo}){
                 });
     console.log(currentDate);
     }
-
         if(dateStart > dateEnd){
-
         toast.error('Revise a data!', {
             position: "top-center",
             autoClose: 5000,
@@ -63,10 +59,7 @@ function TodoForm ({addTodo}){
             theme: "light",
             });
     }
- 
-
 }
-
     return(
         <>
         <ToastContainer
@@ -83,7 +76,10 @@ function TodoForm ({addTodo}){
         />
          <form className='form-task'
                 onSubmit={handleSubmit} >
+            <div className='container-form'>
+            <h2>Criar Tarefa:</h2>
 
+            <div className='task-category'>
                 <label htmlFor='projeto'> </label>
                 <input 
                 name="projeto"
@@ -92,7 +88,7 @@ function TodoForm ({addTodo}){
                 value={value}
                 onChange={(event) => setValue(event.target.value)}
                 />
-
+           
                 <select
                 onChange={(event) => setCategory(event.target.value)}
                 value={category} >
@@ -101,17 +97,19 @@ function TodoForm ({addTodo}){
                     <option value="Pessoal">Pessoal</option>
                     <option value="Trabalho">Trabalho</option>
                 </select>
-
+                
+                </div>
                 <div className="date">
-                    <label htmlFor="dateStart">Início:</label>
+                    <label htmlFor="dateStart"></label>
                     <input
                         name="dateStart" 
+                        
                         type="date" 
                         value={dateStart}
                         onChange={handleDateStart}
                         />
                         
-                    <label htmlFor="dateEnd">Termina em:</label>
+                    <label htmlFor="dateEnd">a</label>
                     <input
                         name="dateEnd" 
                         type="date"
@@ -120,12 +118,13 @@ function TodoForm ({addTodo}){
                         />
                         
                 </div>
-
-                <button className='btn-task' 
-                        type="submit"
-                        onClick={notify}
-                        >Criar tarefa</button>
-
+                
+                    <button className='btn-task' 
+                            type="submit"
+                            onClick={notify}
+                            >Criar Tarefa</button>
+               
+                </div>
             </form>
         </>
     )

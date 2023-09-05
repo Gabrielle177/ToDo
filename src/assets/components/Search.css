@@ -1,0 +1,9 @@
+.search img {
+    height: 2rem;
+}
+
+.search {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}

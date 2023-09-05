@@ -1,0 +1,56 @@
+.form-task {
+    padding-bottom: 1.5rem ; 
+    display: flex;
+    /* flex-direction: column; */
+    
+}
+
+.form-task h2 {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+}
+.container-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;  
+} 
+
+.task-category {
+  display: flex;
+  margin-left: -15px;
+  gap: 1.5rem;
+}
+.date{
+    display: flex;
+    gap: 0.5rem
+   
+}
+
+.btn-task {
+    background-color: #ffffff;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    opacity: 0.8;
+    transition: 0.3;
+    width: 8rem;
+    height: 2rem;
+    margin-top: 1rem;
+    font-size: 1em;     
+}
+
+.btn-task button {
+    background-color: #ffffff;
+    width: 5rem;
+} 
+
+input, select {
+    padding: 5px;
+    margin-bottom: 5px;
+    border: 1px solid  #5a70ee;
+    border-radius: 3px;
+    width: 15rem;
+}
+
+   
