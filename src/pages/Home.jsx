@@ -32,7 +32,7 @@ function Home() {
 
     function addTodo(text, category, dateStart, dateEnd) {
         const newTodo = [...tasks, { 
-            id: Math.floor(Math.random() * 500),
+            id: Math.floor(Math.random() * 200),
             text,
             category,
             dateStart,

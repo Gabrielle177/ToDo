@@ -20,35 +20,12 @@ function TodoForm ({addTodo}){
         const newDate = event.target.value
         setDateEnd(newDate);
     };
-    
+
     const handleSubmit = (event) => {
-        event.preventDefault()
-        if(!value || !category){
-           return "Prencha os campos"
-        }
-        addTodo(value, category, dateStart, dateEnd, currentDate);
-        setValue("");
-        setCategory(""); 
-        setDateStart("");
-        setDateEnd("");
-        setCurrentDate("");
-    }
-    const notify = () => {
-        if (new Date(dateEnd).getTime() < new Date(currentDate).getTime()){
-            toast.warn('Você possui data(s) expiradas!', {
-                position: "top-center",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-                });
-    console.log(currentDate);
-    }
-        if(dateStart > dateEnd){
-        toast.error('Revise a data!', {
+        event.preventDefault();
+
+        if (!value || !category) {
+          toast.error('Preencha os campos!', {
             position: "top-center",
             autoClose: 5000,
             hideProgressBar: false,
@@ -57,9 +34,58 @@ function TodoForm ({addTodo}){
             draggable: true,
             progress: undefined,
             theme: "light",
-            });
-    }
-}
+          });
+          return;
+        }
+
+        const formatNumber = (date) => {
+            return new Date(date).toLocaleDateString("pt-BR");
+        }
+
+        const startDate = new Date(`${dateStart}T00:00:00`);
+        const endDate = new Date(`${dateEnd}T00:00:00`);
+        
+        // Lógica para verificar datas e exibir notificações
+        if (endDate < currentDate) {
+          toast.warn('Você possui data(s) expiradas!', {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+        }
+        console.log(currentDate,"currentDate");
+        console.log(dateStart,"dateStart");
+        console.log(dateEnd,"dateEnd");
+       
+
+        if (startDate > endDate) {
+          toast.error('Revise a data!', {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+          return;
+        }
+        
+        // Adicionar a tarefa e limpar campos
+        addTodo(value, category, formatNumber(startDate) , formatNumber(endDate), formatNumber(currentDate));
+        setValue("");
+        setCategory("");
+        setDateStart("");
+        setDateEnd("");
+        setCurrentDate("");
+      };
+    
     return(
         <>
         <ToastContainer
@@ -103,7 +129,6 @@ function TodoForm ({addTodo}){
                     <label htmlFor="dateStart"></label>
                     <input
                         name="dateStart" 
-                        
                         type="date" 
                         value={dateStart}
                         onChange={handleDateStart}
@@ -121,7 +146,6 @@ function TodoForm ({addTodo}){
                 
                     <button className='btn-task' 
                             type="submit"
-                            onClick={notify}
                             >Criar Tarefa</button>
                
                 </div>
