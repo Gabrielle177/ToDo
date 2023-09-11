@@ -9,7 +9,7 @@ function TodoForm ({addTodo}){
     const [category, setCategory] = useState("");
     const [dateStart, setDateStart] = useState("");
     const [dateEnd, setDateEnd] = useState("");
-    const [currentDate, setCurrentDate] = useState(new Date());
+   
 
     const handleDateStart = (event) => {
         const newDate = event.target.value;
@@ -24,8 +24,8 @@ function TodoForm ({addTodo}){
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        if (!value || !category) {
-          toast.error('Preencha os campos!', {
+        if (!value || !category || !dateStart || !dateEnd) {
+          toast.error('Preencha todos os campos!', {
             position: "top-center",
             autoClose: 5000,
             hideProgressBar: false,
@@ -38,33 +38,25 @@ function TodoForm ({addTodo}){
           return;
         }
 
-        const formatNumber = (date) => {
-            return new Date(date).toLocaleDateString("pt-BR");
-        }
-
-        const startDate = new Date(`${dateStart}T00:00:00`);
-        const endDate = new Date(`${dateEnd}T00:00:00`);
-        
-        // Lógica para verificar datas e exibir notificações
-        if (endDate < currentDate) {
-          toast.warn('Você possui data(s) expiradas!', {
-            position: "top-center",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-          });
-        }
-        console.log(currentDate,"currentDate");
-        console.log(dateStart,"dateStart");
-        console.log(dateEnd,"dateEnd");
+        const currentDate = new Date().toLocaleDateString("pt-br")
+        const startDate = new Date(`${dateStart}T00:00:00`).toLocaleDateString("pt-BR");
+        const endDate = new Date(`${dateEnd}T00:00:00`).toLocaleDateString("pt-BR");
        
-
+        if (endDate < currentDate || startDate < currentDate) {
+          toast.warn('Você possui data(s) expiradas!', {
+            position: "top-center", 
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+        }
+       
         if (startDate > endDate) {
-          toast.error('Revise a data!', {
+          toast.error('Data de início maior que data fim!', {
             position: "top-center",
             autoClose: 5000,
             hideProgressBar: false,
@@ -76,14 +68,13 @@ function TodoForm ({addTodo}){
           });
           return;
         }
-        
-        // Adicionar a tarefa e limpar campos
-        addTodo(value, category, formatNumber(startDate) , formatNumber(endDate), formatNumber(currentDate));
+     
+        addTodo(value, category, startDate ,endDate, currentDate);
         setValue("");
         setCategory("");
         setDateStart("");
         setDateEnd("");
-        setCurrentDate("");
+        
       };
     
     return(

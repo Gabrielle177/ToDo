@@ -1,29 +1,25 @@
 
-.todo-task {
-  margin-bottom: 10px;
-  display: flex;
-  align-items: center;
-  font-size: 20px;
-  justify-content: space-between;
-  min-width: 40rem;
-  max-height:60px;
- 
-}
-.text {
-  max-width: 7em;
-  min-width: 6em;
-}
-.category {
-  max-width: 20em;
-}
-.btns-action img {
-  width: 1.5rem;
-  height: 1.5rem;
-}
 .todo-task-all {
   border-bottom: 1px solid #ddd;
   margin-bottom: 20px;
   padding-bottom: 20px;
+  font-size: 1.1em; 
+}
+
+.todo-task {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr ;
+}
+
+.text {
+  max-width: 2em;
+  min-width:10em;
+  max-height: 4em;
+}
+
+.btns-action img {
+  width: 1.5rem;
+  height: 1.5rem;
 }
 
 .btns-action button {
@@ -34,9 +30,9 @@
   opacity: 0.8;
   transition: 0.3;
   height: 30px;
-  margin-right: 20px;
-  min-width: 3rem;
-  
+  margin-right: 1.5rem;
+  min-width: 2rem;
+  margin-top: 1rem;
 }
 
 button:hover{

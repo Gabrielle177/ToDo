@@ -20,10 +20,8 @@ body {
 }
 
 .content, .box {
-
     border-radius: 80px;
     display: flex;
-    /* justify-content: center; */
     flex-direction: column;
     align-items: center;
     gap: 20px;
@@ -34,6 +32,10 @@ body {
 .box {
     background-color: #7485e9;
     width: 45%;
-    height: auto;  
+    height: auto;   
+}
+
+.search {
+margin-top: 3%;
 }
 

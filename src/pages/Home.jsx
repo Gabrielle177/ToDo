@@ -6,27 +6,7 @@ import Search from '../assets/components/Search';
 import checklist from '../assets/checklist.svg';
 
 function Home() {
-    const [tasks, setTasks] = useState([
-        {
-            id:1,
-            text:"Ir a academia",
-            category:"Pessoal",
-            isCompleted:false,
-            dateStart: "03/08/2023"
-        },
-        {
-            id:2,
-            text:"Estudar React",
-            category:"Estudo",
-            isCompleted:false,
-        },
-        {
-            id:3,
-            text:"Terminar app de organização",
-            category:"Trabalho",
-            isCompleted:false,
-        },
-    ]);
+    const [tasks, setTasks] = useState([]);
 
     const [searchTask, setSearch] = useState("")
 
@@ -68,29 +48,28 @@ function Home() {
      <main>
         <div className='content'>
             <div className='box'> 
-                <div className='title'></div>
-            <div className='search'>           
-                <Search 
-                searchTask={searchTask}
-                setSearch={setSearch} />
-            </div>
-            <div className='all-todos'>
-            {tasks.filter((tasks) => tasks.text.toLowerCase().includes(searchTask.toLowerCase()))
-            .map((task) => (
-               <Todo 
-               key={task.id} 
-               task={task}
-               removeTask={removeTask}
-               completeTask={completeTask}
-               />
-            ))}
-            <div>
-            </div>
-                
-            </div>
-            <div className='createTask'>
-            <TodoForm addTodo={addTodo} />
-            </div>
+                <div className='search'>           
+                    <Search 
+                    searchTask={searchTask}
+                    setSearch={setSearch} />
+                </div>
+
+                <div className='all-todos'>
+                {tasks.filter((tasks) => tasks.text.toLowerCase().includes(searchTask.toLowerCase()))
+                .map((task) => (
+                <Todo 
+                key={task.id} 
+                task={task}
+                removeTask={removeTask}
+                completeTask={completeTask}
+                />
+                ))
+                }
+                </div>
+
+                <div className='createTask'>
+                <TodoForm addTodo={addTodo} />
+                </div>
             </div>
           
            

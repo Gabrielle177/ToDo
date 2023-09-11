@@ -14,8 +14,6 @@ function Search({searchTask, setSearch}){
                 value={searchTask}
                 onChange={(event) => setSearch(event.target.value)}
                 />
-
-           
         </div>
         
         </>
