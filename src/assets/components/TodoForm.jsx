@@ -26,7 +26,7 @@ function TodoForm ({addTodo}){
 
         if (!value || !category || !dateStart || !dateEnd) {
           toast.error('Preencha todos os campos!', {
-            position: "top-center",
+            position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,
             closeOnClick: true,
@@ -44,7 +44,7 @@ function TodoForm ({addTodo}){
        
         if (endDate < currentDate || startDate < currentDate) {
           toast.warn('Você possui data(s) expiradas!', {
-            position: "top-center", 
+            position: "top-right", 
             autoClose: 5000,
             hideProgressBar: false,
             closeOnClick: true,
@@ -57,7 +57,7 @@ function TodoForm ({addTodo}){
        
         if (startDate > endDate) {
           toast.error('Data de início maior que data fim!', {
-            position: "top-center",
+            position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,
             closeOnClick: true,
@@ -80,7 +80,7 @@ function TodoForm ({addTodo}){
     return(
         <>
         <ToastContainer
-        position="top-center"
+        position="top-right"
         autoClose={5000}
         hideProgressBar={false}
         newestOnTop={false}
